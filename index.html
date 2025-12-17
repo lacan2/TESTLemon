@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Get a Quote - Framery</title>
+  <title>Get a Quote</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tell search engines not to index this page -->
+  <meta name="robots" content="noindex, nofollow" />
 
   <style>
     :root {
@@ -108,13 +110,6 @@
       flex: 1;
     }
 
-    .product-img {
-      width: 80px;
-      height: 60px;
-      object-fit: contain;
-      margin-right: 20px;
-    }
-
     .product-details h3 {
       font-size: 1.1rem;
       margin: 0 0 4px;
@@ -152,7 +147,6 @@
       .grid-2 { grid-template-columns: 1fr; }
       .product-row { border-radius: 16px; padding: 16px; }
       .product-info { flex-direction: column; text-align: center; margin-bottom: 16px; }
-      .product-img { margin: 0 0 10px 0; width: 120px; height: auto; }
       .product-input { width: 100%; }
     }
 
@@ -281,246 +275,383 @@
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Auth gate */
+    #auth-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 40%, #000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .auth-card {
+      background: #0b1220;
+      border-radius: 16px;
+      padding: 28px 24px 24px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.7);
+      color: #e5e7eb;
+      text-align: center;
+    }
+
+    .auth-card h1 {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .auth-card p {
+      margin: 0 0 14px;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    #auth-password {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      background: #020617;
+      color: #e5e7eb;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    #auth-password:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.5);
+    }
+
+    #auth-submit {
+      margin-top: 10px;
+      width: 100%;
+      border-radius: 999px;
+      border: none;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+    }
+
+    #auth-submit:hover {
+      filter: brightness(1.03);
+    }
+
+    .auth-error {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #f87171;
+      display: none;
+    }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header class="header">
-      <h1>Get a quote</h1>
-    </header>
-
-    <div class="progress-container">
-      <div class="progress-text" id="step-indicator">Step 1 of 3</div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progress-bar"></div>
-      </div>
+  <!-- Password gate -->
+  <div id="auth-screen">
+    <div class="auth-card">
+      <h1>Restricted access</h1>
+      <p>Please enter the access password to view this page.</p>
+      <input
+        type="password"
+        id="auth-password"
+        placeholder="Password"
+        autocomplete="off"
+      />
+      <button id="auth-submit">Enter</button>
+      <p id="auth-error" class="auth-error">Incorrect password</p>
     </div>
+  </div>
 
-    <form id="MCFUUHTTQDGVH4FDDYYE5NC7EGOA" method="POST">
-      
-      <!-- STEP 1: Products -->
-      <div class="form-step active" data-step="0">
-        <div class="field-group">
-          <label style="margin-bottom: 16px; display:block;">Select products and quantities</label>
-          
-          <!-- Product 1 -->
-          <div class="product-row">
-            <div class="product-info">
-              <img src="https://framery.com/wp-content/uploads/2024/03/framery-one-compact-smart-soundproof-office-phone-booth.webp" alt="Framery One Compact" class="product-img">
-              <div class="product-details">
-                <h3>Framery One Compact™</h3>
-                <p>The smart 1-person office phone booth</p>
-              </div>
-            </div>
-            <div class="product-input">
-              <input type="number" min="0" placeholder="0" name="qty_framery_one_compact" aria-label="Quantity for Framery One Compact">
-            </div>
-          </div>
+  <!-- Real site content (hidden until password is correct) -->
+  <div id="site-content" style="display:none;">
+    <div class="container">
+      <header class="header">
+        <h1>Get a quote</h1>
+      </header>
 
-          <!-- Product 2 -->
-          <div class="product-row">
-            <div class="product-info">
-              <img src="https://framery.com/wp-content/uploads/2024/03/framery-one-smart-soundproof-office-pod.webp" alt="Framery One" class="product-img">
-              <div class="product-details">
-                <h3>Framery One™</h3>
-                <p>The smart one-person office pod</p>
-              </div>
-            </div>
-            <div class="product-input">
-              <input type="number" min="0" placeholder="0" name="qty_framery_one" aria-label="Quantity for Framery One">
-            </div>
-          </div>
-
-          <!-- Product 3 -->
-          <div class="product-row">
-            <div class="product-info">
-              <img src="https://framery.com/wp-content/uploads/2024/03/framery-four-smart-soundproof-meeting-pod.webp" alt="Framery Four" class="product-img">
-              <div class="product-details">
-                <h3>Framery Four™</h3>
-                <p>The smart meeting pod for 1-4 people</p>
-              </div>
-            </div>
-            <div class="product-input">
-              <input type="number" min="0" placeholder="0" name="qty_framery_four" aria-label="Quantity for Framery Four">
-            </div>
-          </div>
-
-          <!-- Product 4 -->
-          <div class="product-row">
-            <div class="product-info">
-              <img src="https://framery.com/wp-content/uploads/2024/03/framery-six-smart-soundproof-meeting-room.webp" alt="Framery Six" class="product-img">
-              <div class="product-details">
-                <h3>Framery Six™</h3>
-                <p>The smart meeting room for teams of up to 6</p>
-              </div>
-            </div>
-            <div class="product-input">
-              <input type="number" min="0" placeholder="0" name="qty_framery_six" aria-label="Quantity for Framery Six">
-            </div>
-          </div>
-
-        </div>
-
-        <div class="buttons-row end">
-          <button type="button" class="btn btn-primary" data-next>Next</button>
+      <div class="progress-container">
+        <div class="progress-text" id="step-indicator">Step 1 of 3</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-bar"></div>
         </div>
       </div>
 
-      <!-- STEP 2: Contact & Location -->
-      <div class="form-step" data-step="1">
-        <div class="grid-2">
+      <form id="MCFUUHTTQDGVH4FDDYYE5NC7EGOA" method="POST">
+        
+        <!-- STEP 1: Products -->
+        <div class="form-step active" data-step="0">
           <div class="field-group">
-            <label for="first_name">First name<span class="required-star">*</span></label>
-            <input type="text" id="first_name" name="first_name" required>
-            <div class="error-msg">Required</div>
+            <label style="margin-bottom: 16px; display:block;">Select products and quantities</label>
+            
+            <!-- Product 1 -->
+            <div class="product-row">
+              <div class="product-info">
+                <div class="product-details">
+                  <h3>Compact Phone Booth</h3>
+                  <p>The smart 1-person office phone booth</p>
+                </div>
+              </div>
+              <div class="product-input">
+                <input type="number" min="0" placeholder="0" name="qty_compact_booth" aria-label="Quantity for Compact Phone Booth">
+              </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-row">
+              <div class="product-info">
+                <div class="product-details">
+                  <h3>Focus Pod</h3>
+                  <p>The smart one-person office pod</p>
+                </div>
+              </div>
+              <div class="product-input">
+                <input type="number" min="0" placeholder="0" name="qty_focus_pod" aria-label="Quantity for Focus Pod">
+              </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-row">
+              <div class="product-info">
+                <div class="product-details">
+                  <h3>Meeting Pod</h3>
+                  <p>The smart meeting pod for 1–4 people</p>
+                </div>
+              </div>
+              <div class="product-input">
+                <input type="number" min="0" placeholder="0" name="qty_meeting_pod" aria-label="Quantity for Meeting Pod">
+              </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-row">
+              <div class="product-info">
+                <div class="product-details">
+                  <h3>Team Room</h3>
+                  <p>The smart meeting room for teams of up to 6</p>
+                </div>
+              </div>
+              <div class="product-input">
+                <input type="number" min="0" placeholder="0" name="qty_team_room" aria-label="Quantity for Team Room">
+              </div>
+            </div>
+
           </div>
-          <div class="field-group">
-            <label for="last_name">Last name<span class="required-star">*</span></label>
-            <input type="text" id="last_name" name="last_name" required>
-            <div class="error-msg">Required</div>
+
+          <div class="buttons-row end">
+            <button type="button" class="btn btn-primary" data-next>Next</button>
           </div>
         </div>
 
-        <div class="grid-2">
-          <div class="field-group">
-            <label for="email">Email<span class="required-star">*</span></label>
-            <input type="email" id="email" name="email" required>
-            <div class="error-msg">Valid email required</div>
+        <!-- STEP 2: Contact & Location -->
+        <div class="form-step" data-step="1">
+          <div class="grid-2">
+            <div class="field-group">
+              <label for="first_name">First name<span class="required-star">*</span></label>
+              <input type="text" id="first_name" name="first_name" required>
+              <div class="error-msg">Required</div>
+            </div>
+            <div class="field-group">
+              <label for="last_name">Last name<span class="required-star">*</span></label>
+              <input type="text" id="last_name" name="last_name" required>
+              <div class="error-msg">Required</div>
+            </div>
           </div>
-          <div class="field-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone">
-          </div>
-        </div>
 
-        <div class="grid-2">
-          <div class="field-group">
-            <label for="city">City<span class="required-star">*</span></label>
-            <input type="text" id="city" name="city" required>
-            <div class="error-msg">Required</div>
+          <div class="grid-2">
+            <div class="field-group">
+              <label for="email">Email<span class="required-star">*</span></label>
+              <input type="email" id="email" name="email" required>
+              <div class="error-msg">Valid email required</div>
+            </div>
+            <div class="field-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
           </div>
-          <div class="field-group">
-            <label for="country">Country<span class="required-star">*</span></label>
-            <select id="country" name="country" required>
-              <option value="">Select country</option>
-              <option value="United States">United States</option>
-              <option value="Canada">Canada</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="Germany">Germany</option>
-              <option value="France">France</option>
-              <option value="Finland">Finland</option>
-              <option value="Sweden">Sweden</option>
-              <option value="Norway">Norway</option>
-              <option value="Denmark">Denmark</option>
-              <option value="Netherlands">Netherlands</option>
-              <option value="Australia">Australia</option>
+
+          <div class="grid-2">
+            <div class="field-group">
+              <label for="city">City<span class="required-star">*</span></label>
+              <input type="text" id="city" name="city" required>
+              <div class="error-msg">Required</div>
+            </div>
+            <div class="field-group">
+              <label for="country">Country<span class="required-star">*</span></label>
+              <select id="country" name="country" required>
+                <option value="">Select country</option>
+                <option value="United States">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Germany">Germany</option>
+                <option value="France">France</option>
+                <option value="Finland">Finland</option>
+                <option value="Sweden">Sweden</option>
+                <option value="Norway">Norway</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="Australia">Australia</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="error-msg">Required</div>
+            </div>
+          </div>
+
+          <!-- Conditional State Fields -->
+          <div class="field-group hidden-field" id="state-wrapper-us">
+            <label for="state_us">State<span class="required-star">*</span></label>
+            <select id="state_us" name="state_us">
+              <option value="">Select state</option>
+              <option value="CA">California</option>
+              <option value="NY">New York</option>
+              <option value="TX">Texas</option>
+              <option value="FL">Florida</option>
+              <!-- Add other US states as needed -->
               <option value="Other">Other</option>
             </select>
             <div class="error-msg">Required</div>
           </div>
-        </div>
 
-        <!-- Conditional State Fields -->
-        <div class="field-group hidden-field" id="state-wrapper-us">
-          <label for="state_us">State<span class="required-star">*</span></label>
-          <select id="state_us" name="state_us">
-            <option value="">Select state</option>
-            <option value="CA">California</option>
-            <option value="NY">New York</option>
-            <option value="TX">Texas</option>
-            <option value="FL">Florida</option>
-            <!-- Add other US states as needed -->
-            <option value="Other">Other</option>
-          </select>
-          <div class="error-msg">Required</div>
-        </div>
-
-        <div class="field-group hidden-field" id="state-wrapper-ca">
-          <label for="state_ca">Province<span class="required-star">*</span></label>
-          <select id="state_ca" name="state_ca">
-            <option value="">Select province</option>
-            <option value="ON">Ontario</option>
-            <option value="QC">Quebec</option>
-            <option value="BC">British Columbia</option>
-            <!-- Add other CA provinces as needed -->
-            <option value="Other">Other</option>
-          </select>
-          <div class="error-msg">Required</div>
-        </div>
-
-        <div class="buttons-row">
-          <button type="button" class="btn btn-secondary" data-prev>Previous</button>
-          <button type="button" class="btn btn-primary" data-next>Next</button>
-        </div>
-      </div>
-
-      <!-- STEP 3: Details & Consent -->
-      <div class="form-step" data-step="2">
-        <div class="field-group">
-          <label for="customer_type">Choose the Best<span class="required-star">*</span></label>
-          <select id="customer_type" name="customer_type" required>
-            <option value="">Select Type</option>
-            <option value="Individual">Individual</option>
-            <option value="Business">Business</option>
-            <option value="Architect">Architect</option>
-          </select>
-          <div class="error-msg">Required</div>
-        </div>
-
-        <!-- Conditional Company Fields -->
-        <div id="company-fields" class="hidden-field">
-          <div class="field-group">
-            <label for="company_size">Company Size<span class="required-star">*</span></label>
-            <select id="company_size" name="company_size">
-              <option value="">Select Size</option>
-              <option value="0-15">0-15</option>
-              <option value="16-50">16-50</option>
-              <option value="51-200">51-200</option>
-              <option value="201+">201+</option>
+          <div class="field-group hidden-field" id="state-wrapper-ca">
+            <label for="state_ca">Province<span class="required-star">*</span></label>
+            <select id="state_ca" name="state_ca">
+              <option value="">Select province</option>
+              <option value="ON">Ontario</option>
+              <option value="QC">Quebec</option>
+              <option value="BC">British Columbia</option>
+              <!-- Add other CA provinces as needed -->
+              <option value="Other">Other</option>
             </select>
             <div class="error-msg">Required</div>
           </div>
 
-          <div class="field-group">
-            <label for="company">Your Company<span class="required-star">*</span></label>
-            <input type="text" id="company" name="company">
-            <div class="error-msg">Required</div>
+          <div class="buttons-row">
+            <button type="button" class="btn btn-secondary" data-prev>Previous</button>
+            <button type="button" class="btn btn-primary" data-next>Next</button>
           </div>
         </div>
 
-        <div class="field-group">
-          <label for="message">Additional message</label>
-          <textarea id="message" name="message"></textarea>
+        <!-- STEP 3: Details & Consent -->
+        <div class="form-step" data-step="2">
+          <div class="field-group">
+            <label for="customer_type">Choose the Best<span class="required-star">*</span></label>
+            <select id="customer_type" name="customer_type" required>
+              <option value="">Select Type</option>
+              <option value="Individual">Individual</option>
+              <option value="Business">Business</option>
+              <option value="Architect">Architect</option>
+            </select>
+            <div class="error-msg">Required</div>
+          </div>
+
+          <!-- Conditional Company Fields -->
+          <div id="company-fields" class="hidden-field">
+            <div class="field-group">
+              <label for="company_size">Company Size<span class="required-star">*</span></label>
+              <select id="company_size" name="company_size">
+                <option value="">Select Size</option>
+                <option value="0-15">0-15</option>
+                <option value="16-50">16-50</option>
+                <option value="51-200">51-200</option>
+                <option value="201+">201+</option>
+              </select>
+              <div class="error-msg">Required</div>
+            </div>
+
+            <div class="field-group">
+              <label for="company">Your Company<span class="required-star">*</span></label>
+              <input type="text" id="company" name="company">
+              <div class="error-msg">Required</div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="message">Additional message</label>
+            <textarea id="message" name="message"></textarea>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="newsletter" name="newsletter" value="true">
+            <label for="newsletter" class="checkbox-label">I would love to receive the newsletter.</label>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="privacy" name="privacy" value="true" required>
+            <label for="privacy" class="checkbox-label">
+              My information can be shared with a local partner located in my area. 
+              Most inquiries are handled by local partners and by selecting this we can provide you with faster and more accurate service. 
+              <a href="#">Privacy Policy</a><span class="required-star">*</span>
+            </label>
+          </div>
+          <div class="error-msg" data-error-for="privacy">You must agree to proceed</div>
+
+          <!-- Hidden consolidated field to ensure all data sends to Salesforce description if schema differs -->
+          <input type="hidden" name="description" id="full_description">
+          <input type="hidden" name="source" value="get-a-quote-page">
+
+          <div class="buttons-row">
+            <button type="button" class="btn btn-secondary" data-prev>Previous</button>
+            <button type="submit" class="btn btn-primary" id="submit-btn">Contact us</button>
+          </div>
         </div>
 
-        <div class="checkbox-group">
-          <input type="checkbox" id="newsletter" name="newsletter" value="true">
-          <label for="newsletter" class="checkbox-label">I would love to receive the Framery Newsletter.</label>
-        </div>
-
-        <div class="checkbox-group">
-          <input type="checkbox" id="privacy" name="privacy" value="true" required>
-          <label for="privacy" class="checkbox-label">
-            My information can be shared with a Framery dealer located in my area. 
-            Most inquiries are handled by Framery dealers and by selecting this we can provide you with faster and more accurate service. 
-            <a href="#">Privacy Policy</a><span class="required-star">*</span>
-          </label>
-        </div>
-        <div class="error-msg" data-error-for="privacy">You must agree to proceed</div>
-
-        <!-- Hidden consolidated field to ensure all data sends to Salesforce description if schema differs -->
-        <input type="hidden" name="description" id="full_description">
-        <input type="hidden" name="source" value="get-a-quote-page">
-
-        <div class="buttons-row">
-          <button type="button" class="btn btn-secondary" data-prev>Previous</button>
-          <button type="submit" class="btn btn-primary" id="submit-btn">Contact us</button>
-        </div>
-      </div>
-
-    </form>
+      </form>
+    </div>
   </div>
+
+  <!-- Password gate logic -->
+  <script>
+    (function () {
+      // 🔐 Set your password here (no brand name)
+      const PASSWORD = "test-access-2025";
+
+      const authScreen = document.getElementById("auth-screen");
+      const siteContent = document.getElementById("site-content");
+      const input = document.getElementById("auth-password");
+      const submit = document.getElementById("auth-submit");
+      const errorMsg = document.getElementById("auth-error");
+
+      function unlock() {
+        authScreen.style.display = "none";
+        siteContent.style.display = "block";
+      }
+
+      // If already authenticated in this browser, skip prompt
+      if (localStorage.getItem("site_form_protected_authenticated") === "yes") {
+        unlock();
+        return;
+      }
+
+      function checkPassword() {
+        if (input.value === PASSWORD) {
+          localStorage.setItem("site_form_protected_authenticated", "yes");
+          unlock();
+        } else {
+          errorMsg.style.display = "block";
+          input.value = "";
+          input.focus();
+        }
+      }
+
+      submit.addEventListener("click", function (e) {
+        e.preventDefault();
+        checkPassword();
+      });
+
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          checkPassword();
+        }
+      });
+    })();
+  </script>
 
   <script>
     (function () {
@@ -593,7 +724,7 @@
       // 4. Validation
       function validateCurrentStep() {
         const step = steps[currentStep];
-        // Only Select visible required inputs (avoids validating hidden conditional fields)
+        // Only select visible required inputs (avoids validating hidden conditional fields)
         const requiredInputs = Array.from(step.querySelectorAll("[required]")).filter(input => {
           return input.offsetParent !== null; // checks visibility
         });
@@ -657,12 +788,11 @@
         submitBtn.textContent = "Sending...";
 
         // Consolidate Product Qty + Message + Type into one description block
-        // This ensures the Salesforce endpoint catches the extra data even if it lacks specific columns
         const products = [
-          { name: "Framery One Compact", qty: form.querySelector('[name="qty_framery_one_compact"]').value },
-          { name: "Framery One", qty: form.querySelector('[name="qty_framery_one"]').value },
-          { name: "Framery Four", qty: form.querySelector('[name="qty_framery_four"]').value },
-          { name: "Framery Six", qty: form.querySelector('[name="qty_framery_six"]').value },
+          { name: "Compact Phone Booth", qty: form.querySelector('[name="qty_compact_booth"]').value },
+          { name: "Focus Pod", qty: form.querySelector('[name="qty_focus_pod"]').value },
+          { name: "Meeting Pod", qty: form.querySelector('[name="qty_meeting_pod"]').value },
+          { name: "Team Room", qty: form.querySelector('[name="qty_team_room"]').value },
         ].filter(p => p.qty > 0).map(p => `${p.name}: ${p.qty}`).join(", ");
 
         const msg = document.getElementById("message").value;
@@ -680,7 +810,7 @@
     })();
   </script>
 
-  <!-- External Form Handler Script -->
+  <!-- External Form Handler Script (kept as-is so Salesforce integration works) -->
   <script
     async
     src="https://framery--mcn21.sandbox.my.site.com/lp/assets/scripts/external-form-handler-host.min.js"
